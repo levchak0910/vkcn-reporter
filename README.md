@@ -2,7 +2,7 @@
 
 This tool help to find class selectors which where defined in different files.
 
-It was created only to find duplicates for vue-kebab-class-naming convention and will not work with other naming conventions.
+It was created only to find duplicates for [vue-kebab-class-naming convention](https://www.npmjs.com/package/eslint-plugin-vue-kebab-class-naming) and will not work with other naming conventions.
 
 Class extraction supported from files: `.css`, `.scss`, `.vue`.
 

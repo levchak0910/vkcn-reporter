@@ -10,7 +10,8 @@
     "build": "rimraf dist && tsc",
     "fix": "prettier . --write",
     "cli": "./cli-entry.sh",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "publ": "yarn build && npm publish"
   },
   "keywords": [
     "vue",

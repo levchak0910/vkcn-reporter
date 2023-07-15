@@ -5,6 +5,10 @@
   "type": "module",
   "main": "dist/program.js",
   "bin": "./cli-entry.sh",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:levchak0910/vkcn-report-duplicated-class-selectors.git"
+  },
   "scripts": {
     "test": "vitest run",
     "build": "rimraf dist && tsc",

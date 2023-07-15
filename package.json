@@ -1,10 +1,14 @@
 {
   "name": "vkcn-report-duplicated-class-selectors",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "This tool helps to detect element classes definition duplication",
   "type": "module",
   "main": "dist/program.js",
   "bin": "./cli-entry.sh",
+  "files": [
+    "dist",
+    "cli-entry.sh"
+  ],
   "repository": {
     "type": "git",
     "url": "git@github.com:levchak0910/vkcn-report-duplicated-class-selectors.git"

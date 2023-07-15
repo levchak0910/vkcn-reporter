@@ -1,6 +1,9 @@
+#!/usr/bin/env node
+
+// @ts-expect-error
 import makeCli from "make-cli"
 
-import { type SelectorFiles, findDuplicatesInFiles } from "./program"
+import { type SelectorFiles, findDuplicatesInFiles } from "./program.js"
 
 const report = (selectorFiles: SelectorFiles) => {
   const duplicateClassSelectors = Object.keys(selectorFiles)
@@ -25,7 +28,7 @@ const report = (selectorFiles: SelectorFiles) => {
 
 makeCli({
   name: "vkcn-report-duplicated-class-selectors",
-  version: "0.1.2",
+  version: "0.1.4",
   usage: `
   
   vkcn-report-duplicated-class-selectors <files> -i <ignore>

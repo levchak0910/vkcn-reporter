@@ -1,8 +1,8 @@
 import { readFile } from "fs/promises"
 import { parse } from "vue/compiler-sfc"
 
-import { extractClassSelectorsFromStyleSource } from "./extract-classes-from-style"
-import { uniqArray } from "./array"
+import { extractClassSelectorsFromStyleSource } from "./extract-classes-from-style.js"
+import { uniqArray } from "./array.js"
 
 export const extractClassSelectorsFromStyleFile = async (filePath: string): Promise<string[]> => {
   const source = await readFile(filePath, "utf-8")

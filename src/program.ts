@@ -2,7 +2,7 @@ import path from "path"
 
 import { glob } from "glob"
 
-import { extractClassSelectorsFromStyleFile, extractClassSelectorsFromVueFile } from "./extract-classes-from-file"
+import { extractClassSelectorsFromStyleFile, extractClassSelectorsFromVueFile } from "./extract-classes-from-file.js"
 
 export type FileSelectors = {
   filePath: string

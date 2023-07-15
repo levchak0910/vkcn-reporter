@@ -1,6 +1,6 @@
 import postcss from "postcss"
 import postcssSCSS from "postcss-scss"
-import postcssExtract from "@csstools/postcss-extract"
+import postcssExtract, { type pluginOptions } from "@csstools/postcss-extract"
 
 export const extractClassSelectorsFromStyleSource = async (source: string): Promise<string[]> => {
   const classes = new Set<string>()
@@ -20,7 +20,7 @@ export const extractClassSelectorsFromStyleSource = async (source: string): Prom
             .forEach(filteredClassSelector => classes.add(filteredClassSelector))
         })
       },
-    }),
+    } satisfies pluginOptions),
   ]).process(source, { syntax: postcssSCSS, from: undefined })
 
   return Array.from(classes)

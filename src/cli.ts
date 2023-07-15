@@ -24,20 +24,25 @@ const report = (selectorFiles: SelectorFiles) => {
 }
 
 makeCli({
-  name: "s",
-  version: "1",
-  usage: "Usage description here",
-  arguments: "<files>",
+  name: "vkcn-report-duplicated-class-selectors",
+  version: "0.1.2",
+  usage: `
+  
+  vkcn-report-duplicated-class-selectors <files> -i <ignore>
+
+  For details please check docs: https://www.npmjs.com/package/vkcn-report-duplicated-class-selectors#cli-usage
+  `,
+  arguments: "<files...>",
   options: [
     {
-      name: "-i, --ignore <ignore>",
+      name: "-i, --ignore <ignore...>",
       description: "Skip files",
     },
   ],
-  action: async (files: string, options: Record<string, string>) => {
+  action: async (files: string[], options: { ignore?: string[] }) => {
     const duplicates = await findDuplicatesInFiles({
-      files: files.split(","),
-      ignore: (options.ignore ?? "").split(","),
+      files,
+      ignore: options.ignore ?? [],
     })
 
     report(duplicates)

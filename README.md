@@ -46,6 +46,6 @@ Use it via shell
 yarn vkcn-report-duplicated-class-selectors <files> -i <ignore>
 ```
 
-Where `files` and `ignore` - is a pattern provided by [glob](https://www.npmjs.com/package/glob) package. Can be used for multiple patterns split by comma `components/**/*.vue,styles/**/*.scss`
+Where `files` and `ignore` - is a patterns provided by [glob](https://www.npmjs.com/package/glob) package. Can be used for multiple patterns split by space `yarn vkcn-report-duplicated-class-selectors components/**/*.vue styles/**/*.scss`
 
 If duplicates was found then the process will finish with code `1`

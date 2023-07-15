@@ -1,6 +1,6 @@
 {
   "name": "vkcn-report-duplicated-class-selectors",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "This tool helps to detect element classes definition duplication",
   "type": "module",
   "main": "dist/program.js",

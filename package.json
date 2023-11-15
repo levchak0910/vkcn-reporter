@@ -16,6 +16,7 @@
   "scripts": {
     "test": "vitest run",
     "build": "rimraf dist && tsc",
+    "lint": "prettier . --check",
     "fix": "prettier . --write",
     "cli": "yarn build && node ./dist/cli.js",
     "prepare": "husky install",

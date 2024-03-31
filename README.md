@@ -4,7 +4,7 @@ The tool that helps to detect VKCN violations:
 
 - find class selectors that are defined in different files.
 
-It was created specifically for [vue-kebab-class-naming](https://www.npmjs.com/package/eslint-plugin-vue-kebab-class-naming) convention and will not work with other naming conventions.
+It was created specifically for [vue-kebab-class-naming](https://www.npmjs.com/package/@vkcn/eslint-plugin) convention and will not work with other naming conventions.
 
 Class extraction supported from files: `.css`, `.scss`, `.vue`.
 

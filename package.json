@@ -1,6 +1,6 @@
 {
   "name": "@vkcn/reporter",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "Tool that helps to detect VKCN violations across the whole project",
   "type": "module",
   "main": "./dist/program.js",

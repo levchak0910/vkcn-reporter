@@ -17,6 +17,7 @@
   },
   "scripts": {
     "test": "vitest run",
+    "test:watch": "vitest",
     "build": "rimraf dist && tsc",
     "lint": "prettier . --check",
     "fix": "prettier . --write",

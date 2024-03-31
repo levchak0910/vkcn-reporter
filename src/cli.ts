@@ -1,9 +1,14 @@
 #!/usr/bin/env node
 
+import fs from "node:fs"
+import path from "node:path"
+
 // @ts-expect-error
 import makeCli from "make-cli"
 
 import { type SelectorFiles, findDuplicatesInFiles } from "./program.js"
+
+const { version } = JSON.parse(fs.readFileSync(path.resolve("package.json"), "utf-8"))
 
 const report = (selectorFiles: SelectorFiles) => {
   const duplicateClassSelectors = Object.keys(selectorFiles)
@@ -27,11 +32,11 @@ const report = (selectorFiles: SelectorFiles) => {
 }
 
 makeCli({
-  name: "@vkcn/reporter",
-  version: "0.1.4",
+  name: "vkcn-reporter",
+  version,
   usage: `
   
-  @vkcn/reporter <files> -i <ignore>
+  vkcn-reporter <files> -i <ignore>
 
   For details please check docs: https://www.npmjs.com/package/@vkcn/reporter#cli-usage
   `,

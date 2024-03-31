@@ -51,9 +51,9 @@ Options: `<files>` and `<ignore>` should be an array of patterns (provided by [g
 Use it via a shell
 
 ```bash
-pnpm @vkcn/reporter <files> -i <ignore>
+pnpm vkcn-reporter <files> -i <ignore>
 ```
 
-Where `files` and `ignore` - are patterns provided by [glob](https://www.npmjs.com/package/glob) package. Can be used for multiple patterns split by a space `@vkcn/reporter components/**/*.vue styles/**/*.scss`
+Where `files` and `ignore` - are patterns provided by [glob](https://www.npmjs.com/package/glob) package. Can be used for multiple patterns split by a space `vkcn-reporter components/**/*.vue styles/**/*.scss`
 
 If violations are found, the process will finish with a code `1`

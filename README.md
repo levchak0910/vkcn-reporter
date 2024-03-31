@@ -1,8 +1,10 @@
-# vkcn-report-duplicated-class-selectors
+# @vkcn/report
 
-This tool help to find class selectors which where defined in different files.
+The tool that helps to detect VKCN violations:
 
-It was created only to find duplicates for [vue-kebab-class-naming convention](https://www.npmjs.com/package/eslint-plugin-vue-kebab-class-naming) and will not work with other naming conventions.
+- find class selectors that are defined in different files.
+
+It was created specifically for [vue-kebab-class-naming](https://www.npmjs.com/package/eslint-plugin-vue-kebab-class-naming) convention and will not work with other naming conventions.
 
 Class extraction supported from files: `.css`, `.scss`, `.vue`.
 
@@ -11,15 +13,21 @@ Class extraction supported from files: `.css`, `.scss`, `.vue`.
 Install the package as a devDependency
 
 ```bash
-yarn add -D vkcn-report-duplicated-class-selectors
-# or
 npm install -D vkcn-report-duplicated-class-selectors
+```
+
+```bash
+yarn add -D vkcn-report-duplicated-class-selectors
+```
+
+```bash
+pnpm add -D vkcn-report-duplicated-class-selectors
 ```
 
 This tool can be used:
 
-- programmatically - in a script for custom reporter
-- cli - run as command from terminal
+- programmatically - in a script for the custom reporter
+- cli - run as a command from the terminal
 
 ### Programmatic usage
 
@@ -36,16 +44,16 @@ const duplicates = await findDuplicatesInFiles({
 doSomethingWithDuplicates(duplicates)
 ```
 
-Options: `<files>` and `<ignore>` should be array of patterns (provided by [glob](https://www.npmjs.com/package/glob) package)
+Options: `<files>` and `<ignore>` should be an array of patterns (provided by [glob](https://www.npmjs.com/package/glob) package)
 
 ### CLI usage
 
-Use it via shell
+Use it via a shell
 
 ```bash
-yarn vkcn-report-duplicated-class-selectors <files> -i <ignore>
+pnpm @vkcn/reporter <files> -i <ignore>
 ```
 
-Where `files` and `ignore` - is a patterns provided by [glob](https://www.npmjs.com/package/glob) package. Can be used for multiple patterns split by space `yarn vkcn-report-duplicated-class-selectors components/**/*.vue styles/**/*.scss`
+Where `files` and `ignore` - are patterns provided by [glob](https://www.npmjs.com/package/glob) package. Can be used for multiple patterns split by a space `yarn vkcn-report-duplicated-class-selectors components/**/*.vue styles/**/*.scss`
 
-If duplicates was found then the process will finish with code `1`
+If violations are found, the process will finish with a code `1`

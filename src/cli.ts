@@ -5,30 +5,10 @@ import path from "node:path"
 
 import { defineCommand, runMain } from "citty"
 
-import { type SelectorFiles, findDuplicatesInFiles } from "./program.js"
+import { findDuplicatesInFiles } from "./program.js"
+import { getReport } from "./report.js"
 
 const { version, description } = JSON.parse(fs.readFileSync(path.resolve("package.json"), "utf-8"))
-
-const report = (selectorFiles: SelectorFiles) => {
-  const duplicateClassSelectors = Object.keys(selectorFiles)
-  if (duplicateClassSelectors.length === 0) {
-    console.log("No duplicate class selector found")
-    return
-  }
-
-  console.log(`Found ${duplicateClassSelectors.length} duplicated css selector`)
-  console.log("")
-
-  duplicateClassSelectors.forEach(classSelector => {
-    const files = selectorFiles[classSelector]!
-
-    console.log(`Class selector ".${classSelector}" defined in ${files.size} files`)
-    for (const file of files) console.log(file)
-    console.log("")
-  })
-
-  process.exit(1)
-}
 
 const main = defineCommand({
   meta: {
@@ -56,7 +36,10 @@ const main = defineCommand({
       typeof ignoreArg === "string" ? ignoreArg.split(" ") : (ignoreArg as string[]).flatMap(s => s.split(" "))
 
     const duplicates = await findDuplicatesInFiles({ files, ignore })
-    report(duplicates)
+    const [report, code] = getReport(duplicates)
+
+    console.log(report)
+    process.exit(code)
   },
 })
 

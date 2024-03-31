@@ -18,9 +18,8 @@
     "build": "rimraf dist && tsc",
     "lint": "prettier . --check",
     "fix": "prettier . --write",
-    "cli": "yarn build && node ./dist/cli.js",
-    "prepare": "husky install",
-    "publ": "yarn build && npm publish"
+    "cli": "pnpm build && node ./dist/cli.js",
+    "prepare": "husky install"
   },
   "keywords": [
     "vue",

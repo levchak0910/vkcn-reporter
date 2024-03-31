@@ -13,15 +13,15 @@ Class extraction supported from files: `.css`, `.scss`, `.vue`.
 Install the package as a devDependency
 
 ```bash
-npm install -D vkcn-report-duplicated-class-selectors
+npm install -D @vkcn/reporter
 ```
 
 ```bash
-yarn add -D vkcn-report-duplicated-class-selectors
+yarn add -D @vkcn/reporter
 ```
 
 ```bash
-pnpm add -D vkcn-report-duplicated-class-selectors
+pnpm add -D @vkcn/reporter
 ```
 
 This tool can be used:
@@ -34,7 +34,7 @@ This tool can be used:
 Use it in a js/ts script
 
 ```ts
-import { findDuplicatesInFiles } from "vkcn-report-duplicated-class-selectors"
+import { findDuplicatesInFiles } from "@vkcn/reporter"
 
 const duplicates = await findDuplicatesInFiles({
   files: ["styles/**/*.{scss,css}", "components/**/*.vue"],
@@ -54,6 +54,6 @@ Use it via a shell
 pnpm @vkcn/reporter <files> -i <ignore>
 ```
 
-Where `files` and `ignore` - are patterns provided by [glob](https://www.npmjs.com/package/glob) package. Can be used for multiple patterns split by a space `yarn vkcn-report-duplicated-class-selectors components/**/*.vue styles/**/*.scss`
+Where `files` and `ignore` - are patterns provided by [glob](https://www.npmjs.com/package/glob) package. Can be used for multiple patterns split by a space `@vkcn/reporter components/**/*.vue styles/**/*.scss`
 
 If violations are found, the process will finish with a code `1`

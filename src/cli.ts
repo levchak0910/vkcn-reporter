@@ -27,13 +27,13 @@ const report = (selectorFiles: SelectorFiles) => {
 }
 
 makeCli({
-  name: "vkcn-report-duplicated-class-selectors",
+  name: "@vkcn/reporter",
   version: "0.1.4",
   usage: `
   
-  vkcn-report-duplicated-class-selectors <files> -i <ignore>
+  @vkcn/reporter <files> -i <ignore>
 
-  For details please check docs: https://www.npmjs.com/package/vkcn-report-duplicated-class-selectors#cli-usage
+  For details please check docs: https://www.npmjs.com/package/@vkcn/reporter#cli-usage
   `,
   arguments: "<files...>",
   options: [

@@ -36,6 +36,7 @@
   "license": "MIT",
   "dependencies": {
     "@csstools/postcss-extract": "^3.0.1",
+    "citty": "^0.1.6",
     "glob": "^10.3.12",
     "postcss": "^8.4.38",
     "postcss-scss": "^4.0.9",
@@ -46,7 +47,6 @@
     "bumpp": "^9.4.0",
     "eslint": "^8.57.0",
     "husky": "^9.0.11",
-    "make-cli": "^4.0.0",
     "prettier": "^3.2.5",
     "rimraf": "^5.0.5",
     "typescript": "^5.4.3",

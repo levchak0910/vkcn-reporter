@@ -3,12 +3,11 @@
 import fs from "node:fs"
 import path from "node:path"
 
-// @ts-expect-error
-import makeCli from "make-cli"
+import { defineCommand, runMain } from "citty"
 
 import { type SelectorFiles, findDuplicatesInFiles } from "./program.js"
 
-const { version } = JSON.parse(fs.readFileSync(path.resolve("package.json"), "utf-8"))
+const { version, description } = JSON.parse(fs.readFileSync(path.resolve("package.json"), "utf-8"))
 
 const report = (selectorFiles: SelectorFiles) => {
   const duplicateClassSelectors = Object.keys(selectorFiles)
@@ -31,28 +30,34 @@ const report = (selectorFiles: SelectorFiles) => {
   process.exit(1)
 }
 
-makeCli({
-  name: "vkcn-reporter",
-  version,
-  usage: `
-  
-  vkcn-reporter <files> -i <ignore>
-
-  For details please check docs: https://www.npmjs.com/package/@vkcn/reporter#cli-usage
-  `,
-  arguments: "<files...>",
-  options: [
-    {
-      name: "-i, --ignore <ignore...>",
-      description: "Skip files",
+const main = defineCommand({
+  meta: {
+    name: "vkcn-reporter",
+    version,
+    description,
+  },
+  args: {
+    files: {
+      type: "positional",
+      description: "files global",
+      required: true,
     },
-  ],
-  action: async (files: string[], options: { ignore?: string[] }) => {
-    const duplicates = await findDuplicatesInFiles({
-      files,
-      ignore: options.ignore ?? [],
-    })
+    ignore: {
+      type: "string",
+      description: "Skip files",
+      alias: ["i"],
+    },
+  },
+  async run({ args }) {
+    const files = args.files.split(" ")
 
+    const ignoreArg = args.ignore ?? ""
+    const ignore =
+      typeof ignoreArg === "string" ? ignoreArg.split(" ") : (ignoreArg as string[]).flatMap(s => s.split(" "))
+
+    const duplicates = await findDuplicatesInFiles({ files, ignore })
     report(duplicates)
   },
 })
+
+runMain(main)

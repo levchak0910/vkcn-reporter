@@ -2,33 +2,15 @@ import path from "path"
 
 import { glob } from "glob"
 
-import { extractClassSelectorsFromStyleFile, extractClassSelectorsFromVueFile } from "./extract-classes-from-file.js"
+import type { FileSelector } from "./models/FileSelector.js"
+import type { SelectorsReport } from "./models/SelectorsReport.js"
 
-export type FileSelectors = {
-  filePath: string
-  selectors: string[]
-}
-
-export type SelectorFiles = Record<string, Set<string>>
-
-const findDuplicates = (fileSelectors: FileSelectors[]) => {
-  const selectorFiles: SelectorFiles = {}
-
-  fileSelectors.forEach(fileSelector => {
-    fileSelector.selectors.forEach(selector => {
-      const files = selectorFiles[selector]
-
-      if (!files) {
-        selectorFiles[selector] = new Set([fileSelector.filePath])
-      } else {
-        files.add(fileSelector.filePath)
-      }
-    })
-  })
-
-  const duplicateEntries = Object.entries(selectorFiles).filter(([, files]) => files.size > 1)
-  return Object.fromEntries(duplicateEntries)
-}
+import {
+  extractClassSelectorsFromStyleFile,
+  extractClassSelectorsFromVueFile,
+} from "./functions/extract-classes-from-file.js"
+import { findDuplicates } from "./functions/find-duplicates.js"
+import { findLeaks } from "./functions/find-leaks.js"
 
 type Options = {
   files: string[]
@@ -41,7 +23,9 @@ const handlers: Record<string, (arg: string) => Promise<string[]>> = {
   ".vue": extractClassSelectorsFromVueFile,
 }
 
-export const findDuplicatesInFiles = async (options: Options) => {
+type Violations = Record<"duplicates" | "leaks", SelectorsReport>
+
+export const findViolationsInFiles = async (options: Options): Promise<Violations> => {
   const files = await Promise.all(
     options.files.map(filesGlob =>
       glob(filesGlob, {
@@ -51,7 +35,7 @@ export const findDuplicatesInFiles = async (options: Options) => {
   )
 
   const fileSelectors = await Promise.all(
-    files.flat().map<Promise<FileSelectors>>(filePath => {
+    files.flat().map<Promise<FileSelector>>(filePath => {
       const { ext } = path.parse(filePath)
       const handler = handlers[ext]
 
@@ -64,5 +48,11 @@ export const findDuplicatesInFiles = async (options: Options) => {
     }),
   )
 
-  return findDuplicates(fileSelectors)
+  const duplicates = findDuplicates(fileSelectors)
+  const leaks = findLeaks(fileSelectors)
+
+  return {
+    duplicates,
+    leaks,
+  }
 }

@@ -5,8 +5,8 @@ import path from "node:path"
 
 import { defineCommand, runMain } from "citty"
 
-import { findDuplicatesInFiles } from "./program.js"
-import { getReport } from "./report.js"
+import { findViolationsInFiles } from "./program.js"
+import { getDuplicatesReport, getLeaksReport } from "./functions/report.js"
 
 const { version, description } = JSON.parse(fs.readFileSync(path.resolve("package.json"), "utf-8"))
 
@@ -35,11 +35,14 @@ const main = defineCommand({
     const ignore =
       typeof ignoreArg === "string" ? ignoreArg.split(" ") : (ignoreArg as string[]).flatMap(s => s.split(" "))
 
-    const duplicates = await findDuplicatesInFiles({ files, ignore })
-    const [report, code] = getReport(duplicates)
+    const { duplicates, leaks } = await findViolationsInFiles({ files, ignore })
 
-    console.log(report)
-    process.exit(code)
+    const [duplicatesReport, duplicatesCode] = getDuplicatesReport(duplicates)
+    const [leaksReport, leaksCode] = getLeaksReport(leaks)
+
+    console.log(duplicatesReport)
+    console.log(leaksReport)
+    process.exit(duplicatesCode || leaksCode)
   },
 })
 

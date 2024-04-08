@@ -8,16 +8,19 @@ export const extractClassSelectorsFromStyleSource = async (source: string): Prom
   await postcss([
     postcssExtract({
       extractLate: true,
-      queries: { classes: 'rule[selector^="."]' },
+      queries: {
+        elementClasses: 'rule[selector^="."]',
+        modifierClasses: 'rule[selector^="&."]',
+      },
       results(results) {
-        return (results.classes ?? []).flatMap(entry => {
+        const extractedClasses = [results.elementClasses ?? [], results.modifierClasses ?? []].flat()
+
+        extractedClasses.flatMap(entry => {
           const { selectors: classSelectors } = entry as { selectors: string[] }
 
           classSelectors
             .flatMap(classSelector => classSelector.split(" "))
-            .flatMap(classSelector => classSelector.split("."))
-            .filter(classSelector => classSelector.includes("--"))
-            .forEach(filteredClassSelector => classes.add(filteredClassSelector))
+            .forEach(classSelector => classes.add(classSelector))
         })
       },
     } satisfies pluginOptions),

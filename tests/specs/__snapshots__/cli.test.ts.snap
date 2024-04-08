@@ -1,0 +1,127 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`cli > test glob with multiple ignore glob 1`] = `
+"❌ Found 2 duplicated class selectors
+
+Class selector ".main-component--scss" defined in 2 files
+  - tests/mock/main-component.vue
+  - tests/mock/duplicate-component.vue
+
+Class selector ".main-component--css" defined in 2 files
+  - tests/mock/main-component.vue
+  - tests/mock/duplicate-component.vue
+
+👍 No potentially leaking class selectors found
+"
+`;
+
+exports[`cli > test glob with single ignore glob 1`] = `
+"❌ Found 2 duplicated class selectors
+
+Class selector ".main-component--scss" defined in 2 files
+  - tests/mock/main-component.vue
+  - tests/mock/duplicate-component.vue
+
+Class selector ".main-component--css" defined in 3 files
+  - tests/mock/main-component.vue
+  - tests/mock/main-component--css.css
+  - tests/mock/duplicate-component.vue
+
+❌ Found 2 potentially leaking class selectors
+
+Class selector ".css-mod" can potentially leak in 2 files
+  - tests/mock/main-component.vue
+  - tests/mock/css-mod.css
+
+Class selector ".css-mod-double" can potentially leak in 2 files
+  - tests/mock/main-component.vue
+  - tests/mock/css-mod-double.css
+
+"
+`;
+
+exports[`cli > test multiple globs 1`] = `
+"❌ Found 2 duplicated class selectors
+
+Class selector ".main-component--css" defined in 3 files
+  - tests/mock/main-component--css.css
+  - tests/mock/main-component.vue
+  - tests/mock/duplicate-component.vue
+
+Class selector ".main-component--scss" defined in 3 files
+  - tests/mock/main-component--scss.scss
+  - tests/mock/main-component.vue
+  - tests/mock/duplicate-component.vue
+
+❌ Found 6 potentially leaking class selectors
+
+Class selector ".scss-mod" can potentially leak in 3 files
+  - tests/mock/main-component.vue
+  - tests/mock/scss-mod.scss
+  - tests/mock/scss-mod-parent.scss
+
+Class selector ".scss-mod-double" can potentially leak in 2 files
+  - tests/mock/main-component.vue
+  - tests/mock/scss-mod-double.scss
+
+Class selector ".scss-mod-nested" can potentially leak in 2 files
+  - tests/mock/main-component.vue
+  - tests/mock/scss-mod-nested.scss
+
+Class selector ".scss-mod-nested-double" can potentially leak in 2 files
+  - tests/mock/main-component.vue
+  - tests/mock/scss-mod-nested-double.scss
+
+Class selector ".css-mod" can potentially leak in 2 files
+  - tests/mock/main-component.vue
+  - tests/mock/css-mod.css
+
+Class selector ".css-mod-double" can potentially leak in 2 files
+  - tests/mock/main-component.vue
+  - tests/mock/css-mod-double.css
+
+"
+`;
+
+exports[`cli > test single glob 1`] = `
+"❌ Found 2 duplicated class selectors
+
+Class selector ".main-component--scss" defined in 3 files
+  - tests/mock/main-component.vue
+  - tests/mock/main-component--scss.scss
+  - tests/mock/duplicate-component.vue
+
+Class selector ".main-component--css" defined in 3 files
+  - tests/mock/main-component.vue
+  - tests/mock/main-component--css.css
+  - tests/mock/duplicate-component.vue
+
+❌ Found 6 potentially leaking class selectors
+
+Class selector ".scss-mod" can potentially leak in 3 files
+  - tests/mock/main-component.vue
+  - tests/mock/scss-mod.scss
+  - tests/mock/scss-mod-parent.scss
+
+Class selector ".scss-mod-double" can potentially leak in 2 files
+  - tests/mock/main-component.vue
+  - tests/mock/scss-mod-double.scss
+
+Class selector ".scss-mod-nested" can potentially leak in 2 files
+  - tests/mock/main-component.vue
+  - tests/mock/scss-mod-nested.scss
+
+Class selector ".scss-mod-nested-double" can potentially leak in 2 files
+  - tests/mock/main-component.vue
+  - tests/mock/scss-mod-nested-double.scss
+
+Class selector ".css-mod" can potentially leak in 2 files
+  - tests/mock/main-component.vue
+  - tests/mock/css-mod.css
+
+Class selector ".css-mod-double" can potentially leak in 2 files
+  - tests/mock/main-component.vue
+  - tests/mock/css-mod-double.css
+
+"
+`;

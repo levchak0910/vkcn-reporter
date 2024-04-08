@@ -1,10 +1,11 @@
 # @vkcn/report
 
-The tool that helps to detect VKCN violations:
+The tool that helps to detect [VKCN](https://www.npmjs.com/package/@vkcn/eslint-plugin) (vue-kebab-class-naming) violations:
 
-- find class selectors that are defined in different files.
+- [element](https://github.com/levchak0910/vkcn-eslint-plugin/blob/HEAD/docs/rules/no-convention-violation.md#element-class) class selectors that are defined in different files.
+- [modifier](https://github.com/levchak0910/vkcn-eslint-plugin/blob/HEAD/docs/rules/no-convention-violation.md#modifier-class) class selectors that may leak in different files.
 
-It was created specifically for [vue-kebab-class-naming](https://www.npmjs.com/package/@vkcn/eslint-plugin) convention and will not work with other naming conventions.
+It was created specifically for VKCN convention and will not work with any other naming conventions.
 
 Class extraction supported from files: `.css`, `.scss`, `.vue`.
 
@@ -26,7 +27,7 @@ pnpm add -D @vkcn/reporter
 
 This tool can be used:
 
-- programmatically - in a script for the custom reporter
+- programmatically - in a script for a custom reporter
 - cli - run as a command from the terminal
 
 ### Programmatic usage
@@ -44,16 +45,16 @@ const duplicates = await findDuplicatesInFiles({
 doSomethingWithDuplicates(duplicates)
 ```
 
-Options: `<files>` and `<ignore>` should be an array of patterns (provided by [glob](https://www.npmjs.com/package/glob) package)
+Options: `files` and `ignore` should be an array of patterns (provided by [glob](https://www.npmjs.com/package/glob) package)
 
 ### CLI usage
 
 Use it via a shell
 
 ```bash
-pnpm vkcn-reporter <files> -i <ignore>
+vkcn-reporter <files> -i <ignore>
 ```
 
-Where `files` and `ignore` - are patterns provided by [glob](https://www.npmjs.com/package/glob) package. Can be used for multiple patterns split by a space `vkcn-reporter components/**/*.vue styles/**/*.scss`
+Where `<files>` and `<ignore>` - are patterns provided by [glob](https://www.npmjs.com/package/glob) package. Can be used for multiple patterns split by a space `vkcn-reporter 'components/**/*.vue styles/**/*.scss'`. (_Make sure your folder and file names do not contain space_)
 
 If violations are found, the process will finish with a code `1`

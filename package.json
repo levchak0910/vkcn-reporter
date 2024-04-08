@@ -39,6 +39,7 @@
     "@csstools/postcss-extract": "^3.0.1",
     "citty": "^0.1.6",
     "glob": "^10.3.12",
+    "picocolors": "^1.0.0",
     "postcss": "^8.4.38",
     "postcss-scss": "^4.0.9",
     "vue": "^3.4.21"

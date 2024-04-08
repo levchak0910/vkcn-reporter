@@ -19,43 +19,36 @@ describe("cli", () => {
     execSync("pnpm build")
   })
 
-  it("test wrong path", async () => {
+  it("test wrong glob", async () => {
     const stdout = execSync("node dist/cli.js wrong-path")
 
-    expect(stdout.toString()).toContain("No duplicate class selector found")
+    expect(stdout.toString()).toContain("No duplicate class selectors found")
+    expect(stdout.toString()).toContain("No potentially leaking class selectors found")
   })
 
-  it("test correct path", async () => {
+  it("test single glob", async () => {
     const output = executeFailingCommand("node dist/cli.js tests/mock/*.{css,scss,vue}")
 
-    expect(output).toContain("foo-component--bar")
-    expect(output).toContain("tests/mock/foo-component.vue")
-    expect(output).toContain("tests/mock/foo-component.scss")
-    expect(output).toContain("tests/mock/foo-component.css")
-
-    expect(output).toContain("foo-component--uniq-css")
-    expect(output).toContain("tests/mock/foo-component.css")
-    expect(output).toContain("tests/mock/bar-component.css")
-
-    expect(output).toContain("foo-component--uniq-scss")
-    expect(output).toContain("tests/mock/foo-component.scss")
-    expect(output).toContain("tests/mock/bar-component.css")
-
-    expect(output).toContain("foo-component--uniq-vue-css")
-    expect(output).toContain("tests/mock/foo-component.vue")
-    expect(output).toContain("tests/mock/bar-component.css")
-
-    expect(output).toContain("foo-component--uniq-vue-scss")
-    expect(output).toContain("tests/mock/foo-component.vue")
-    expect(output).toContain("tests/mock/bar-component.css")
+    expect(output).toMatchSnapshot()
   })
 
-  it("test correct path with ignore", async () => {
-    const output = executeFailingCommand("node dist/cli.js tests/mock/*.{css,scss,vue} -i tests/mock/bar-component.css")
+  it("test multiple globs", async () => {
+    const output = executeFailingCommand("node dist/cli.js 'tests/mock/*.css tests/mock/*.scss tests/mock/*.vue'")
 
-    expect(output).toContain("foo-component--bar")
-    expect(output).toContain("tests/mock/foo-component.vue")
-    expect(output).toContain("tests/mock/foo-component.scss")
-    expect(output).toContain("tests/mock/foo-component.css")
+    expect(output).toMatchSnapshot()
+  })
+
+  it("test glob with single ignore glob", async () => {
+    const output = executeFailingCommand("node dist/cli.js tests/mock/*.{css,scss,vue} -i tests/mock/**/*.scss")
+
+    expect(output).toMatchSnapshot()
+  })
+
+  it("test glob with multiple ignore glob", async () => {
+    const output = executeFailingCommand(
+      "node dist/cli.js tests/mock/*.{css,scss,vue} -i 'tests/mock/**/*.scss tests/mock/**/*.css'",
+    )
+
+    expect(output).toMatchSnapshot()
   })
 })

@@ -35,14 +35,15 @@ This tool can be used:
 Use it in a js/ts script
 
 ```ts
-import { findDuplicatesInFiles } from "@vkcn/reporter"
+import { findViolationsInFiles } from "@vkcn/reporter"
 
-const duplicates = await findDuplicatesInFiles({
+const { duplicates, leaks } = await findViolationsInFiles({
   files: ["styles/**/*.{scss,css}", "components/**/*.vue"],
   ignore: ["some/styles/to/ignore/*.css"],
 })
 
 doSomethingWithDuplicates(duplicates)
+doSomethingWithLeaks(leaks)
 ```
 
 Options: `files` and `ignore` should be an array of patterns (provided by [glob](https://www.npmjs.com/package/glob) package)
